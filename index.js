@@ -19,12 +19,9 @@ app.post("/cocktail", async(req, res) =>{
     if (radiovalue=="rcname"){
         span = req.body.cname
         string = "s="
-    }else if(radiovalue=="rfname"){
+    }else{
         span = req.body.f
         string = "f="
-    }else{
-        span = req.body.iname
-        string = "i="
     }
     try{
         const result = await axios.get(API_URL + string + span)

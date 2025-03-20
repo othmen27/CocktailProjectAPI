@@ -9,45 +9,46 @@
 <body>
     <fieldset>
         <legend>Form</legend>
-    <form method="post" action="cocktail">
-        <div class="container">
-        <label><input type="radio" name="radio" id="rcname" value="rcname">Search By Coctail Name</label>
-        <label><input type="radio" name="radio" id="rfname" value="rfname">Search By First Letter</label>
-        <label><input type="radio" name="radio" id="riname" value="riname">Search By Ingridient Name</label><br>
-        </div>
-        <label for="cname">Cocktail Name:</label>
-        <input type="text" name="cname" id="cname" readonly><br>
-        <label for="f">First Letter:</label>
-        <input type="text" name="f" id="f" maxlength="1" readonly><br>
-        <label for="iname">Ingridient Name:</label>
-        <input type="text" name="iname" id="iname" readonly><br>
-        <input type="submit" value="Submit">
-    </form>
+        <form method="post" action="cocktail">
+            <div class="container">
+                <label><input type="radio" name="radio" id="rcname" value="rcname">Search By Cocktail Name</label>
+                <label><input type="radio" name="radio" id="rfname" value="rfname">Search By First Letter</label>
+            </div>
+            <label for="cname">Cocktail Name:</label>
+            <input type="text" name="cname" id="cname" readonly><br>
+            <label for="f">First Letter:</label>
+            <input type="text" name="f" id="f" maxlength="1" readonly><br>
+            <input type="submit" value="Submit">
+        </form>
     </fieldset>
     <% if (name){ %>
     <fieldset>
         <legend>Cocktail</legend>
-        <h1>Cocktail : <%= name %></h1>
-        <h2>Ingredients: </h2>
-        <ul>
-            <% 
-                let i = -1
-                ingredients.forEach(ing => { 
-                   i++ %>
-                <li><%= ing  %> | <%= measures[i]%></li>
-           <% }); %>
-        </ul>
-        <h2>Insrutctions: </h2>
-        <p><%= instruction%></p>
-        <h2>Image</h2>
-        <img src="<%= img%>">
+        <h1>Cocktail: <%= name %></h1>
+        <div class="cocktail-container">
+            <div class="ingredients">
+                <h2>Ingredients:</h2>
+                <ul>
+                    <% 
+                        let i = -1
+                        ingredients.forEach(ing => { 
+                           i++ %>
+                        <li><%= ing %> | <%= measures[i] %></li>
+                    <% }); %>
+                </ul>
+                <h2>Instructions:</h2>
+                <p><%= instruction %></p>
+            </div>
+            <div class="image">
+                <img src="<%= img %>" alt="Cocktail Image">
+            </div>
+        </div>
     </fieldset>
     <% } %>
 </body>
 <script>
     const rcname = document.getElementById("rcname");
     const rfname = document.getElementById("rfname");
-    const riname = document.getElementById("riname");
     function test(){
         if (rcname.checked) {
             document.getElementById("cname").removeAttribute("readonly")
@@ -61,17 +62,10 @@
             document.getElementById("cname").value =""
             document.getElementById("iname").setAttribute("readonly", true)
             document.getElementById("iname").value =""
-        }else if(riname.checked){
-            document.getElementById("iname").removeAttribute("readonly")
-            document.getElementById("cname").setAttribute("readonly", true)
-            document.getElementById("f").value =""
-            document.getElementById("f").setAttribute("readonly", true)
-            document.getElementById("cname").value =""
         }
     }
     rcname.addEventListener("click", test)
     rfname.addEventListener("click", test)
-    riname.addEventListener("click", test)
     test()
 </script>
 </html>
