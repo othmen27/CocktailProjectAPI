@@ -29,13 +29,16 @@ app.post("/cocktail", async(req, res) =>{
     try{
         const result = await axios.get(API_URL + string + span)
         let ing = new Array()
+        let measures = new Array()
         let nb = getRndInteger(0,result.data.drinks.length)
+
         for (let i = 1; i < 16; i++) {
             if(result.data.drinks[nb][`strIngredient${i}`] != null){
                 ing[i-1]=result.data.drinks[nb][`strIngredient${i}`]
+                measures[i-1]=result.data.drinks[nb][`strMeasure${i}`]
             }
         }
-        res.render("index.ejs",{name: JSON.stringify(result.data.drinks[nb].strDrink),ingredients : ing})
+        res.render("index.ejs",{name: JSON.stringify(result.data.drinks[nb].strDrink),ingredients : ing,measures: measures,instruction:result.data.drinks[nb].strInstructions,img:result.data.drinks[nb].strDrinkThumb})
     }catch(error){
         res.render("index.ejs",{name: error.message})
     }

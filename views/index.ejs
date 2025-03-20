@@ -30,10 +30,17 @@
         <h1>Cocktail : <%= name %></h1>
         <h2>Ingredients: </h2>
         <ul>
-            <% ingredients.forEach(ing => { %>
-                <li><%= ing  %></li>
+            <% 
+                let i = -1
+                ingredients.forEach(ing => { 
+                   i++ %>
+                <li><%= ing  %> | <%= measures[i]%></li>
            <% }); %>
         </ul>
+        <h2>Insrutctions: </h2>
+        <p><%= instruction%></p>
+        <h2>Image</h2>
+        <img src="<%= img%>">
     </fieldset>
     <% } %>
 </body>
