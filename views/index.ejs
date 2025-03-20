@@ -7,9 +7,11 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
+    <fieldset>
+        <legend>Form</legend>
     <form method="post" action="cocktail">
         <div class="container">
-        <label><input type="radio" name="radio" id="rcname" value="rcname" checked>Search By Coctail Name</label>
+        <label><input type="radio" name="radio" id="rcname" value="rcname">Search By Coctail Name</label>
         <label><input type="radio" name="radio" id="rfname" value="rfname">Search By First Letter</label>
         <label><input type="radio" name="radio" id="riname" value="riname">Search By Ingridient Name</label><br>
         </div>
@@ -21,6 +23,19 @@
         <input type="text" name="iname" id="iname" readonly><br>
         <input type="submit" value="Submit">
     </form>
+    </fieldset>
+    <% if (name){ %>
+    <fieldset>
+        <legend>Cocktail</legend>
+        <h1>Cocktail : <%= name %></h1>
+        <h2>Ingredients: </h2>
+        <ul>
+            <% ingredients.forEach(ing => { %>
+                <li><%= ing  %></li>
+           <% }); %>
+        </ul>
+    </fieldset>
+    <% } %>
 </body>
 <script>
     const rcname = document.getElementById("rcname");
@@ -50,5 +65,6 @@
     rcname.addEventListener("click", test)
     rfname.addEventListener("click", test)
     riname.addEventListener("click", test)
+    test()
 </script>
 </html>
